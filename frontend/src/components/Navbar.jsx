@@ -38,6 +38,10 @@ const Navbar = () => {
           <p>CONTACT</p>
           <hr className='w-2/4 border-none h-[1.5px] bg-gray-700 hidden' />
         </NavLink>
+
+          <a href="https://foreveradminpart.netlify.app">
+          <li className='py-1 px-4 border-gray-200 border-2 rounded-full'>Admin Panel</li>
+        </a>
       </ul>
       <div className='flex items-center gap-6'>
         <img onClick={() => setShowSearch(true)} className='w-5 cursor-pointer' src={assets.search_icon} alt="" />
@@ -46,7 +50,7 @@ const Navbar = () => {
           {/* Dropdown Menu */}
           {token && <div className='group-hover:block hidden absolute dropdown-menu right-0 pt-4'>
             <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-500 rounded'>
-              <p className='cursor-pointer hover:text-black '>My Profile</p>
+              <p onClick={()=>navigate('/profile')} className='cursor-pointer hover:text-black '>My Profile</p>
               <p onClick={()=>navigate('/orders')} className='cursor-pointer hover:text-black '>Orders</p>
               <p onClick={logout} className='cursor-pointer hover:text-black '>Logout</p>
             </div>

@@ -9,13 +9,16 @@ export const ShopContext = createContext();
 const ShopContextProvider = (props) => {
 
     const currency = '$';
-    const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    // const backendUrl = import.meta.env.VITE_BACKEND_URL;
+    const backendUrl = import.meta.env.VITE_BACKEND_URL || 'http://localhost:5000';
     const delivery_fee = 10;
     const [search, setSearch] = useState('');
     const [showSearch, setShowSearch] = useState(false);
     const [cartItems, setCartItems] = useState({});
     const [products, setProducts] = useState([]);
-    const [token, setToken] = useState('');
+    // const [token, setToken] = useState('');
+    const [token, setToken] = useState(() => localStorage.getItem('token') || '');
+    const [userData, setUserData] = useState('')
     const navigate = useNavigate();
 
     const addToCart = async (itemId, size) => {
@@ -42,6 +45,14 @@ const ShopContextProvider = (props) => {
 
         if (token) {
             try {
+                const user = JSON.parse(localStorage.getItem("user"));  // ✅ get user from localStorage
+                const userId = user?._id;
+
+                if (!userId) {
+                    toast.error("User ID not found. Please log in again.");
+                    return;
+                }
+
                 await axios.post(backendUrl + '/api/cart/add', { itemId, size }, { headers: { token } })
             } catch (error) {
                 console.log(error);
@@ -132,8 +143,6 @@ const ShopContextProvider = (props) => {
             } else {
                 toast.error(response.data.message)
             }
-
-
         } catch (error) {
             console.log(error);
             toast.error(error.message)
@@ -152,21 +161,70 @@ const ShopContextProvider = (props) => {
         }
     }
 
+
+    const loadUserProfileData = async () => {
+        try {
+            const { data } = await axios.get(`${backendUrl}/api/user/get-profile`, {
+                headers: { token }
+            });
+
+            if (data.success) {
+                setUserData(data.userData);
+            } else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error(error.message);
+        }
+    };
+
+    const updateUserProfile = async (formData) => {
+        try {
+            const { data } = await axios.post(`${backendUrl}/api/user/update-profile`, formData, {
+                headers: {
+                    token,
+                    'Content-Type': 'multipart/form-data'
+                }
+            });
+
+            if (data.success) {
+                toast.success("Profile updated successfully");
+                loadUserProfileData(); // Refresh user data
+            } else {
+                toast.error(data.message);
+            }
+        } catch (error) {
+            console.error(error);
+            toast.error(error.message);
+        }
+    };
+
+
+
     useEffect(() => {
         getProductsData()
     }, [])
 
+    // useEffect(() => {
+    //     if (!token && localStorage.getItem('token')) {
+    //         setToken(localStorage.getItem('token'));
+    //         getUserCart(localStorage.getItem('token'))
+    //     }
+    //     // const savedToken = localStorage.getItem('token');
+    //     // if (savedToken) {
+    //     //     setToken(savedToken);
+    //     //     // getUserCart(savedToken);
+    //     // }
+    // }, [])
+
     useEffect(() => {
-        if (!token && localStorage.getItem('token')) {
-            setToken(localStorage.getItem('token'));
-            getUserCart(localStorage.getItem('token'))
+        if (token) {
+            getUserCart(token);
+            loadUserProfileData();
         }
-        // const savedToken = localStorage.getItem('token');
-        // if (savedToken) {
-        //     setToken(savedToken);
-        //     // getUserCart(savedToken);
-        // }
-    }, [])
+    }, [token]);
+
 
     const value = {
         products, currency, delivery_fee,
@@ -174,7 +232,9 @@ const ShopContextProvider = (props) => {
         cartItems, setCartItems, addToCart,
         getCartCount, updateQuantity, getCartAmount,
         navigate, backendUrl,
-        token, setToken
+        token, setToken,
+        loadUserProfileData, userData, setUserData,
+        updateUserProfile
     }
 
     return (

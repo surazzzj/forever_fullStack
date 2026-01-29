@@ -1,16 +1,15 @@
-
-import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
 
 export default defineConfig({
+  base: '/', // ✅ IMPORTANT for deployment
   plugins: [react(), tailwindcss()],
-  build: {
-    rollupOptions: {
-      external: [], // Remove any external that might be causing issues
-    },
-  },
   server: {
-    port: 4000,
+    port: 5173,
+  },
+  build: {
+    outDir: 'dist',
+    sourcemap: false,
   },
 })

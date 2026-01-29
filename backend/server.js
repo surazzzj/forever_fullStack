@@ -22,7 +22,7 @@ app.use(cors({
         "http://localhost:5173",
         "http://localhost:5174",
         "https://your-frontend.netlify.app",
-        "https://your-admin.netlify.app"
+        "https://forever-updatedadmin.netlify.app"
     ],
     credentials: true
 }));

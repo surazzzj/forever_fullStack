@@ -62,16 +62,11 @@ const Collection = () => {
         applyFilter();
         break;
     }
-
   }
-
-  // useEffect(() => {
-  //   setFilterProducts(products);
-  // }, [])
 
   useEffect(() => {
     applyFilter();
-  }, [category, subCategory, search, showSearch,products])
+  }, [category, subCategory, search, showSearch, products])
 
   useEffect(() => {
     sortProduct();

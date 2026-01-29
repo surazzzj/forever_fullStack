@@ -6,43 +6,32 @@ import { toast } from 'react-toastify'
 
 const Verify = () => {
 
-  const { navigate, token, setCartItems, backendUrl } = useContext(ShopContext);
-  const [searchparams, setSearchParams] = useSearchParams();
+  const { navigate, token, backendUrl, clearAndSyncCart } = useContext(ShopContext)
 
-  const success = searchparams.get('success');
-  const orderId = searchparams.get('orderId');
+  const [params] = useSearchParams()
 
-  const verifyPayment = async () => {
-    try {
-
-      if (!token) {
-        return null
-      }
-
-      const response = await axios.post(backendUrl + '/api/order/verifyStripe', { success, orderId }, { headers: { token } })
-      if (response.data.success) {
-        setCartItems({})
-        navigate('/orders');
-      } else {
-        navigate('/cart');
-      }
-    } catch (error) {
-      console.log(error);
-      toast.error(error.message);
-
-    }
-  }
+  const success = params.get('success')
+  const orderId = params.get('orderId')
 
   useEffect(() => {
-    verifyPayment()
+    const verify = async () => {
+      try {
+        const res = await axios.post(backendUrl + '/api/order/verifyStripe', { success, orderId }, { headers: { token } })
+        if (res.data.success) {
+          await clearAndSyncCart()
+          navigate('/orders')
+        } else {
+          navigate('/cart')
+        }
+      } catch (err) {
+        toast.error('Verification failed', err.message);
+      }
+    }
+
+    if (token) verify()
   }, [token])
 
-
-  return (
-    <div>
-
-    </div>
-  )
+  return <div className="text-center mt-20">Verifying payment...</div>
 }
 
 export default Verify

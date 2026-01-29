@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import { ShopContext } from '../context/ShopContext'
 import Title from '../components/Title';
 import axios from 'axios';
+import { toast } from 'react-toastify';
 
 const Orders = () => {
 
@@ -15,7 +16,7 @@ const Orders = () => {
         return null
       }
 
-      const response = await axios.post(backendUrl + '/api/order/userorders', {}, { headers: { token } })
+      const response = await axios.post(backendUrl + '/api/order/userOrders', {}, { headers: { token } })
       if (response.data.success) {
         let allOrdersItem = []
         response.data.orders.map((order) => {
@@ -30,16 +31,14 @@ const Orders = () => {
         setOrderData(allOrdersItem.reverse());
       }
 
-
     } catch (error) {
-
+      toast.error('fetch orders failed', error.message);
     }
   }
 
   useEffect(() => {
     loadOrderData()
   }, [token])
-
 
   return (
     <div className='border-t border-gray-300 pt-16'>
@@ -48,8 +47,11 @@ const Orders = () => {
       </div>
 
       <div>
+        {/* {
+          orderData.slice(1, 4).map((item, index) => ( */}
         {
-          orderData.slice(1, 4).map((item, index) => (
+          orderData.map((item, index) => (
+
             <div key={index} className='py-4 border-t border-gray-300 text-gray-700 flex flex-col md:flex-row md:items-center md:justify-between gap-4'>
               <div className='flex items-start gap-6 text-sm'>
                 <img className='w-16 sm:w-20' src={item.image[0]} alt="" />
@@ -61,7 +63,7 @@ const Orders = () => {
                     <p>Size: {item.size}</p>
                   </div>
                   <p className='mt-1'>Date: <span className='text-gray-400'>{new Date(item.date).toDateString()}</span> </p>
-                   <p className='mt-1'>Payment: <span className='text-gray-400'>{item.paymentMethod}</span> </p>
+                  <p className='mt-1'>Payment: <span className='text-gray-400'>{item.paymentMethod}</span> </p>
                 </div>
               </div>
               <div className='md:w-1/2 flex justify-between'>

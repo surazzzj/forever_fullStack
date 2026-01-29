@@ -10,7 +10,8 @@ import { currency } from '../../../admin/src/App'
 const PlaceOrder = () => {
 
   const [method, setMethod] = useState('cod');
-  const { navigate, cartItems, setCartItems, getCartAmount, backendUrl, delivery_fee, products, token } = useContext(ShopContext);
+  const { navigate, cartItems, getCartAmount, backendUrl, delivery_fee, products, token, clearAndSyncCart } = useContext(ShopContext);
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -31,6 +32,11 @@ const PlaceOrder = () => {
   }
 
   const initPay = (order) => {
+    if (!window.Razorpay) {
+      toast.error('Razorpay SDK not loaded');
+      return;
+    }
+
     const options = {
       key: import.meta.env.VITE_RAZORPAY_KEY_ID,
       amount: order.amount,
@@ -38,33 +44,38 @@ const PlaceOrder = () => {
       name: 'Order Payment',
       description: 'Order Payment',
       order_id: order.id,
-      receipt: order.receipt,
+
       handler: async (response) => {
-        console.log(response)
         try {
 
-          const { data } = await axios.post(backendUrl + '/api/order/verifyRazorpay', response, { headers: { token } })
+          const { data } = await axios.post(`${backendUrl}/api/order/verifyRazorpay`, { ...response }, { headers: { token } });
           if (data.success) {
-            navigate('/orders')
-            setCartItems({})
+            toast.success('Payment successful');
+            await clearAndSyncCart();
+            navigate('/orders');
+            return;
           }
+          toast.error('Payment verification failed');
+
         } catch (error) {
-          console.log(error);
-          toast.error(error)
-
+          console.error(error);
+          toast.error('Payment failed');
         }
-      }
-    }
+      },
 
-    const rzp = new window.Razorpay(options)
-    rzp.open()
-  }
+      theme: {
+        color: '#000000',
+      },
+    };
+
+    console.log("Razorpay SDK:", window.Razorpay);
+    const rzp = new window.Razorpay(options);
+    rzp.open();
+  };
 
   const onSubmitHandler = async (event) => {
     event.preventDefault();
-
     try {
-
       let orderItems = []
 
       for (const items in cartItems) {
@@ -94,13 +105,14 @@ const PlaceOrder = () => {
           console.log(response.data.success);
 
           if (response.data.success) {
-            setCartItems({})
-            navigate('/orders')
+            await clearAndSyncCart();
+            navigate('/orders');
           } else {
             toast.error(response.data.message)
           }
           break;
 
+        // Api call for Stripe
         case 'stripe':
           const responseStripe = await axios.post(backendUrl + '/api/order/stripe', orderData, { headers: { token } })
           if (responseStripe.data.success) {
@@ -111,26 +123,26 @@ const PlaceOrder = () => {
           }
           break;
 
+        // Api call for Razorpay
         case 'razorpay':
-          const responseRazorpay = await axios.post(backendUrl + '/api/order/razorpay', orderData, { headers: { token } })
+          const responseRazorpay = await axios.post(backendUrl + '/api/order/razorpay', orderData, { headers: { token } });
           if (responseRazorpay.data.success) {
-            initPay(responseRazorpay.data.order)
+            console.log("Opening Razorpay popup");
+            initPay(responseRazorpay.data.order);
+          } else {
+            toast.error("Razorpay order failed");
           }
-
           break;
 
         default:
           break;
       }
 
-
     } catch (error) {
       console.error(error);
       toast.error(error.message);
     }
   }
-
-
 
   return (
     <form onSubmit={onSubmitHandler} className='flex flex-col sm:flex-row justify-between gap-4 pt-5 sm:pt-14 min-h-[80vh] border-gray-300 border-t'>
@@ -194,3 +206,7 @@ const PlaceOrder = () => {
 }
 
 export default PlaceOrder
+
+
+
+

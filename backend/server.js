@@ -21,7 +21,7 @@ app.use(cors({
     origin: [
         "http://localhost:5173",
         "http://localhost:5174",
-        "https://your-frontend.netlify.app",
+        "https://updatedforever-frontend.netlify.app",
         "https://forever-updatedadmin.netlify.app"
     ],
     credentials: true

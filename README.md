@@ -1,6 +1,6 @@
 # 🛍️ FOREVER – Full-Stack MERN E-commerce Platform
 
-A modern, scalable full-stack E-commerce web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js).
+A modern, scalable full-stack **E-commerce web application** built using the **MERN stack** (MongoDB, Express.js, React.js, Node.js).
 The platform supports secure authentication, product browsing, cart management, order placement, and multiple payment methods, along with a dedicated Admin Panel for product and order management.
 
 🌐 Live Demo: https://updatedforever-frontend.netlify.app

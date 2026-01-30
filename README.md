@@ -6,8 +6,6 @@ The platform supports secure authentication, product browsing, cart management, 
 🌐 Live Demo: https://updatedforever-frontend.netlify.app
 🛠️ Admin Panel: https://forever-updatedadmin.netlify.app
 
----
-
 ## 🔧 Tech Stack
 **Frontend"**
 
@@ -29,7 +27,9 @@ The platform supports secure authentication, product browsing, cart management, 
 * Razorpay Payment Gateway
 * Cloudinary & Multer (Image Uploads)
 
+
 ---
+
 
 ## Deployment & Tools
 
@@ -39,32 +39,36 @@ The platform supports secure authentication, product browsing, cart management, 
 * GitHub
 * Postman
 
+
 ---
+
 
 ## ✨ Key Features
 
-👤 User Features
-🔐 Secure JWT-based Authentication
-🛒 Add to Cart & Remove from Cart
-📦 Place Orders with Address Details
-💳 Multiple Payment Options: Stripe, Razorpay, Cash on Delivery
-📄 Order History & Order Status Tracking
-📱 Fully Responsive UI (Mobile + Desktop)
-🧑‍💼 Admin Features
-🧾 Admin Authentication
-➕ Add / Update / Delete Products
-🖼️ Image Upload with Cloudinary
-📦 Manage Orders & Order Status
-📊 View All User Orders
+* 👤 User Features
+* 🔐 Secure JWT-based Authentication
+* 🛒 Add to Cart & Remove from Cart
+* 📦 Place Orders with Address Details
+* 💳 Multiple Payment Options: Stripe, Razorpay, Cash on Delivery
+* 📄 Order History & Order Status Tracking
+* 📱 Fully Responsive UI (Mobile + Desktop)
+* 🧑‍💼 Admin Features
+* 🧾 Admin Authentication
+* ➕ Add / Update / Delete Products
+* 🖼️ Image Upload with Cloudinary
+* 📦 Manage Orders & Order Status
+* 📊 View All User Orders
+
 
 ---
 
+
 ## 🧠 Application Flow
 
-User signs up / logs in using JWT authentication
-Products are fetched dynamically from MongoDB
-User adds items to cart (size-based support)
-Checkout with delivery information
-Payment via Stripe / Razorpay or COD
-Order stored securely in database
-Admin manages products & orders from admin panel
+* User signs up / logs in using JWT authentication
+* Products are fetched dynamically from MongoDB
+* User adds items to cart (size-based support)
+* Checkout with delivery information
+* Payment via Stripe / Razorpay or COD
+* Order stored securely in database
+* Admin manages products & orders from admin panel

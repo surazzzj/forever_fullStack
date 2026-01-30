@@ -3,100 +3,68 @@
 A modern, scalable full-stack E-commerce web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js).
 The platform supports secure authentication, product browsing, cart management, order placement, and multiple payment methods, along with a dedicated Admin Panel for product and order management.
 
-🌐 Live Demo: https://your-frontend-url.netlify.app
+🌐 Live Demo: https://updatedforever-frontend.netlify.app
+🛠️ Admin Panel: https://forever-updatedadmin.netlify.app
 
-🛠️ Admin Panel: https://your-admin-url.netlify.app
+---
 
 ## 🔧 Tech Stack
-### Frontend
+**Frontend"**
 
-React.js (Vite)
+* React.js (Vite)
+* Tailwind CSS
+* React Router DOM
+* Axios
+* React Toastify
+* Context API (Global State)
 
-Tailwind CSS
+**Backend:**
 
-React Router DOM
+* Node.js
+* Express.js
+* MongoDB (Mongoose ODM)
+* JWT Authentication
+* Bcrypt (Password Hashing)
+* Stripe Payment Gateway
+* Razorpay Payment Gateway
+* Cloudinary & Multer (Image Uploads)
 
-Axios
+---
 
-React Toastify
+## Deployment & Tools
 
-Context API (Global State)
+* Netlify (Frontend & Admin)
+* Render / Railway (Backend)
+* MongoDB Atlas
+* GitHub
+* Postman
 
-### Backend
-
-Node.js
-
-Express.js
-
-MongoDB (Mongoose ODM)
-
-JWT Authentication
-
-Bcrypt (Password Hashing)
-
-Stripe Payment Gateway
-
-Razorpay Payment Gateway
-
-Cloudinary & Multer (Image Uploads)
-
-###Deployment & Tools
-
-Netlify (Frontend & Admin)
-
-Render / Railway (Backend)
-
-MongoDB Atlas
-
-GitHub
-
-Postman
+---
 
 ## ✨ Key Features
+
 👤 User Features
-
 🔐 Secure JWT-based Authentication
-
 🛒 Add to Cart & Remove from Cart
-
 📦 Place Orders with Address Details
-
-💳 Multiple Payment Options:
-
-Stripe
-
-Razorpay
-
-Cash on Delivery
-
+💳 Multiple Payment Options: Stripe, Razorpay, Cash on Delivery
 📄 Order History & Order Status Tracking
-
 📱 Fully Responsive UI (Mobile + Desktop)
-
 🧑‍💼 Admin Features
-
 🧾 Admin Authentication
-
 ➕ Add / Update / Delete Products
-
 🖼️ Image Upload with Cloudinary
-
 📦 Manage Orders & Order Status
-
 📊 View All User Orders
+
+---
 
 ## 🧠 Application Flow
 
 User signs up / logs in using JWT authentication
-
 Products are fetched dynamically from MongoDB
-
 User adds items to cart (size-based support)
-
 Checkout with delivery information
-
 Payment via Stripe / Razorpay or COD
-
 Order stored securely in database
-
 Admin manages products & orders from admin panel

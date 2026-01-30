@@ -1,4 +1,4 @@
-#🛍️ FOREVER – Full-Stack MERN E-commerce Platform
+# 🛍️ FOREVER – Full-Stack MERN E-commerce Platform
 
 A modern, scalable full-stack E-commerce web application built using the MERN stack (MongoDB, Express.js, React.js, Node.js).
 The platform supports secure authentication, product browsing, cart management, order placement, and multiple payment methods, along with a dedicated Admin Panel for product and order management.
@@ -7,8 +7,8 @@ The platform supports secure authentication, product browsing, cart management, 
 
 🛠️ Admin Panel: https://your-admin-url.netlify.app
 
-##🔧 Tech Stack
-###Frontend
+## 🔧 Tech Stack
+### Frontend
 
 React.js (Vite)
 
@@ -22,7 +22,7 @@ React Toastify
 
 Context API (Global State)
 
-###Backend
+### Backend
 
 Node.js
 
@@ -52,7 +52,7 @@ GitHub
 
 Postman
 
-##✨ Key Features
+## ✨ Key Features
 👤 User Features
 
 🔐 Secure JWT-based Authentication
@@ -85,7 +85,7 @@ Cash on Delivery
 
 📊 View All User Orders
 
-##🧠 Application Flow
+## 🧠 Application Flow
 
 User signs up / logs in using JWT authentication
 

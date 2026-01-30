@@ -8,7 +8,7 @@ The platform supports secure authentication, product browsing, cart management, 
 🛠️ Admin Panel: https://forever-updatedadmin.netlify.app
 
 ## 🔧 Tech Stack
-**Frontend"**
+**Frontend:**
 
 * React.js (Vite)
 * Tailwind CSS

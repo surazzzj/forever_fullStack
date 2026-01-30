@@ -4,6 +4,7 @@ A modern, scalable full-stack E-commerce web application built using the MERN st
 The platform supports secure authentication, product browsing, cart management, order placement, and multiple payment methods, along with a dedicated Admin Panel for product and order management.
 
 🌐 Live Demo: https://updatedforever-frontend.netlify.app
+
 🛠️ Admin Panel: https://forever-updatedadmin.netlify.app
 
 ## 🔧 Tech Stack
@@ -72,3 +73,25 @@ The platform supports secure authentication, product browsing, cart management, 
 * Payment via Stripe / Razorpay or COD
 * Order stored securely in database
 * Admin manages products & orders from admin panel
+
+## 🚀 Getting Started
+
+```bash
+git clone https://github.com/surazzzj/forever_fullStack.git
+cd forever_fullStack
+
+### Prerequisites
+
+- Node.js
+- MongoDB Atlas or local instance
+- Stripe / Razorpay account (for payments)
+
+### 📁 Folder Structure
+
+├── frontend/        # User-facing React app
+├── admin/           # Admin dashboard (React)
+├── backend/         # Node.js + Express API
+├── .env             # Environment variables
+├── netlify.toml     # Netlify configuration
+├── README.md
+

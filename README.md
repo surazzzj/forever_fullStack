@@ -46,14 +46,15 @@ The platform supports secure authentication, product browsing, cart management, 
 
 ## ✨ Key Features
 
-* 👤 User Features
+ 👤 **User Features**
 * 🔐 Secure JWT-based Authentication
 * 🛒 Add to Cart & Remove from Cart
 * 📦 Place Orders with Address Details
 * 💳 Multiple Payment Options: Stripe, Razorpay, Cash on Delivery
 * 📄 Order History & Order Status Tracking
 * 📱 Fully Responsive UI (Mobile + Desktop)
-* 🧑‍💼 Admin Features
+  
+  🧑‍💼 **Admin Features**
 * 🧾 Admin Authentication
 * ➕ Add / Update / Delete Products
 * 🖼️ Image Upload with Cloudinary
